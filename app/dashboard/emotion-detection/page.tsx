@@ -42,7 +42,19 @@ export default function EmotionDetectionPage() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const { toast } = useToast()
   const { setCurrentEmotionWithConfidence } = useEmotion()
-  const { user } = useAuth()
+  const { user, loading } = useAuth()
+
+  // Client-side auth redirect
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (!loading && !user) {
+      window.location.href = "/auth";
+    }
+  }, [user, loading]);
+
+  if (loading || (typeof window !== "undefined" && !user)) {
+    return null; // or a loading spinner
+  }
 
   // Load face-api.js library and models
   useEffect(() => {

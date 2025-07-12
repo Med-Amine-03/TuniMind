@@ -17,7 +17,18 @@ import { Textarea } from "@/components/ui/textarea"
 import { getMoods, getEmotions } from "@/lib/data-service"
 
 export default function ProfilePage() {
-  const { user, profile, updateProfile } = useAuth()
+  const { user, profile, updateProfile, loading } = useAuth()
+  // Client-side auth redirect
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (!loading && !user) {
+      window.location.href = "/auth";
+    }
+  }, [user, loading]);
+
+  if (loading || (typeof window !== "undefined" && !user)) {
+    return null; // or a loading spinner
+  }
   const { toast } = useToast()
   const [isLoading, setIsLoading] = useState(false)
   const [isEditing, setIsEditing] = useState(false)

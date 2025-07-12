@@ -41,7 +41,18 @@ export default function ChatbotSimplePage() {
   const [recognition, setRecognition] = useState<any>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const { toast } = useToast()
-  const { user, profile, session } = useAuth()
+  const { user, profile, session, loading } = useAuth()
+  // Client-side auth redirect
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (!loading && !user) {
+      window.location.href = "/auth";
+    }
+  }, [user, loading]);
+
+  if (loading || (typeof window !== "undefined" && !user)) {
+    return null; // or a loading spinner
+  }
 
   // Load messages from localStorage on initial render
   useEffect(() => {

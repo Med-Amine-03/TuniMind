@@ -13,7 +13,18 @@ import { useToast } from "@/hooks/use-toast"
 import { EnvironmentStatus } from "@/app/env-config.tsx"
 
 export default function SettingsPage() {
-  const { user, profile, updateProfile } = useAuth()
+  const { user, profile, updateProfile, loading } = useAuth()
+  // Client-side auth redirect
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (!loading && !user) {
+      window.location.href = "/auth";
+    }
+  }, [user, loading]);
+
+  if (loading || (typeof window !== "undefined" && !user)) {
+    return null; // or a loading spinner
+  }
   const { toast } = useToast()
   const [name, setName] = useState(profile?.name || "")
   const [isUpdating, setIsUpdating] = useState(false)

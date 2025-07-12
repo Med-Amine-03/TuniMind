@@ -80,6 +80,18 @@ export default function MoodTrackerPage() {
   const { toast } = useToast()
   const { user, loading } = useAuth()
 
+  // Client-side auth redirect
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (!loading && !user) {
+      window.location.href = "/auth";
+    }
+  }, [user, loading]);
+
+  if (loading || (typeof window !== "undefined" && !user)) {
+    return null; // or a loading spinner
+  }
+
   // Redirect to auth if not logged in
   useEffect(() => {
     if (typeof window === "undefined") return
