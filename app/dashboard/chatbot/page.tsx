@@ -44,28 +44,32 @@ export default function ChatbotPage() {
   const { toast } = useToast()
   const { user, profile, session } = useAuth()
 
-  // Load messages from localStorage on initial render
+  // Load messages from localStorage on initial render (client-side only)
   useEffect(() => {
-    try {
-      const savedMessages = localStorage.getItem("chatMessages")
-      if (savedMessages) {
-        const parsedMessages = JSON.parse(savedMessages).map((msg: any) => ({
-          ...msg,
-          timestamp: new Date(msg.timestamp),
-        }))
-        setMessages(parsedMessages)
+    if (typeof window !== "undefined") {
+      try {
+        const savedMessages = localStorage.getItem("chatMessages")
+        if (savedMessages) {
+          const parsedMessages = JSON.parse(savedMessages).map((msg: any) => ({
+            ...msg,
+            timestamp: new Date(msg.timestamp),
+          }))
+          setMessages(parsedMessages)
+        }
+      } catch (error) {
+        console.error("Error loading messages from localStorage:", error)
       }
-    } catch (error) {
-      console.error("Error loading messages from localStorage:", error)
     }
   }, [])
 
-  // Save messages to localStorage when they change
+  // Save messages to localStorage when they change (client-side only)
   useEffect(() => {
-    try {
-      localStorage.setItem("chatMessages", JSON.stringify(messages))
-    } catch (error) {
-      console.error("Error saving messages to localStorage:", error)
+    if (typeof window !== "undefined") {
+      try {
+        localStorage.setItem("chatMessages", JSON.stringify(messages))
+      } catch (error) {
+        console.error("Error saving messages to localStorage:", error)
+      }
     }
   }, [messages])
 
@@ -74,29 +78,49 @@ export default function ChatbotPage() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }, [messages])
 
-  // Store user info in localStorage for persistence
+  // Store user info in localStorage for persistence (client-side only)
   useEffect(() => {
-    if (user?.email) {
-      localStorage.setItem("userEmail", user.email)
-    }
-    if (user?.id) {
-      localStorage.setItem("userId", user.id)
-    }
-    if (profile?.name) {
-      localStorage.setItem("userName", profile.name)
-    }
-    if (profile?.profile_image_url) {
-      localStorage.setItem("userProfileImage", profile.profile_image_url)
+    if (typeof window !== "undefined") {
+      if (user?.email) {
+        localStorage.setItem("userEmail", user.email)
+      }
+      if (user?.id) {
+        localStorage.setItem("userId", user.id)
+      }
+      if (profile?.name) {
+        localStorage.setItem("userName", profile.name)
+      }
+      if (profile?.profile_image_url) {
+        localStorage.setItem("userProfileImage", profile.profile_image_url)
+      }
     }
   }, [user, profile])
 
-  // Clear chat history when user logs out
+  // Clear chat history when user logs out (client-side only)
   useEffect(() => {
-    const handleStorageChange = () => {
-      // Check if user is logged out
-      const storedUser = localStorage.getItem("user")
-      if (!storedUser) {
-        // Clear chat messages
+    if (typeof window !== "undefined") {
+      const handleStorageChange = () => {
+        // Check if user is logged out
+        const storedUser = localStorage.getItem("user")
+        if (!storedUser) {
+          // Clear chat messages
+          setMessages([
+            {
+              id: "1",
+              content: "Hello! I'm your mental health assistant. How can I help you today?",
+              sender: "bot",
+              timestamp: new Date(),
+            },
+          ])
+          localStorage.removeItem("chatMessages")
+        }
+      }
+
+      window.addEventListener("storage", handleStorageChange)
+
+      // Also check session directly
+      if (!session) {
+        localStorage.removeItem("chatMessages")
         setMessages([
           {
             id: "1",
@@ -105,27 +129,11 @@ export default function ChatbotPage() {
             timestamp: new Date(),
           },
         ])
-        localStorage.removeItem("chatMessages")
       }
-    }
 
-    window.addEventListener("storage", handleStorageChange)
-
-    // Also check session directly
-    if (!session) {
-      localStorage.removeItem("chatMessages")
-      setMessages([
-        {
-          id: "1",
-          content: "Hello! I'm your mental health assistant. How can I help you today?",
-          sender: "bot",
-          timestamp: new Date(),
-        },
-      ])
-    }
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange)
+      return () => {
+        window.removeEventListener("storage", handleStorageChange)
+      }
     }
   }, [session])
 
@@ -376,9 +384,13 @@ export default function ChatbotPage() {
     }
   }
 
-  // Get user profile image from context or localStorage
-  const userProfileImage = profile?.profile_image_url || localStorage.getItem("userProfileImage") || null
-  const userName = profile?.name || localStorage.getItem("userName") || "User"
+  // Get user profile image from context or localStorage (client-side safe)
+  let userProfileImage = profile?.profile_image_url || null
+  let userName = profile?.name || "User"
+  if (typeof window !== "undefined") {
+    userProfileImage = userProfileImage || localStorage.getItem("userProfileImage") || null
+    userName = userName !== "User" ? userName : localStorage.getItem("userName") || "User"
+  }
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
