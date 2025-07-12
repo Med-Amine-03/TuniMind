@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -9,10 +9,25 @@ import { useToast } from "@/hooks/use-toast"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import tips from "@/data/self-care-tips.json"
 
+import { useAuth } from "@/contexts/auth-context"
+
 // Categories for tabs
 const categories = [...Array.from(new Set(tips.map((tip) => tip.category)))]
 
 export default function SelfCarePage() {
+  const { user, loading } = useAuth();
+  // Client-side auth redirect
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (!loading && !user) {
+      window.location.href = "/auth";
+    }
+  }, [user, loading]);
+
+  if (loading || (typeof window !== "undefined" && !user)) {
+    return null; // or a loading spinner
+  }
+
   const [activeCategory, setActiveCategory] = useState(categories[0])
   const [savedTips, setSavedTips] = useState<string[]>([])
   const { toast } = useToast()

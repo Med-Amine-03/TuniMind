@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
@@ -8,10 +8,25 @@ import { Play, Clock, Heart } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import exercises from "@/data/relaxation-exercises.json"
 
+import { useAuth } from "@/contexts/auth-context"
+
 // Filter categories
 const categories = ["All", ...Array.from(new Set(exercises.map((ex) => ex.category)))]
 
 export default function RelaxationPage() {
+  const { user, loading } = useAuth();
+  // Client-side auth redirect
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (!loading && !user) {
+      window.location.href = "/auth";
+    }
+  }, [user, loading]);
+
+  if (loading || (typeof window !== "undefined" && !user)) {
+    return null; // or a loading spinner
+  }
+
   const [selectedCategory, setSelectedCategory] = useState("All")
   const [selectedExercise, setSelectedExercise] = useState<(typeof exercises)[0] | null>(null)
   const { toast } = useToast()
