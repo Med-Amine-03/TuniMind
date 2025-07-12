@@ -67,68 +67,65 @@ const findUserByEmail = (email: string): User | undefined => {
 }
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [session, setSession] = useState<Session | null>(null)
-  const [user, setUser] = useState<User | null>(null)
-  const [profile, setProfile] = useState<Profile | null>(null)
-  const [loading, setLoading] = useState(true)
+  // Use lazy initializers to avoid hydration issues and stuck login
+  const getInitialUser = () => {
+    if (typeof window !== "undefined") {
+      const storedUser = localStorage.getItem("user")
+      if (storedUser) {
+        try {
+          return JSON.parse(storedUser)
+        } catch {
+          return null
+        }
+      }
+    }
+    return null
+  }
+  const getInitialProfile = () => {
+    if (typeof window !== "undefined") {
+      const storedProfile = localStorage.getItem("profile")
+      if (storedProfile) {
+        try {
+          return JSON.parse(storedProfile)
+        } catch {
+          return null
+        }
+      }
+    }
+    return null
+  }
+  const [user, setUser] = useState<User | null>(getInitialUser)
+  const [profile, setProfile] = useState<Profile | null>(getInitialProfile)
+  const [session, setSession] = useState<Session | null>(user ? { user } : null)
+  const [loading, setLoading] = useState(false)
   const { toast } = useToast()
 
   useEffect(() => {
-    // Initialize registered users if not exists
-    if (!localStorage.getItem("registeredUsers")) {
-      // Add the special user to registered users
-      const specialUser: User = {
-        id: "special_user_123",
-        email: "amineothmani56@gmail.com",
-        password: "123456",
-        user_metadata: { name: "Amine Othmani", specialAccess: true },
-      }
-      localStorage.setItem("registeredUsers", JSON.stringify([specialUser]))
-
-      // Create special user profile with default image
-      const specialProfile: Profile = {
-        id: specialUser.id,
-        email: specialUser.email,
-        name: "Amine Othmani",
-        bio: "Mental health enthusiast and app tester",
-        profile_image_url: SPECIAL_USER_IMAGE,
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-      }
-      localStorage.setItem(`profile_${specialUser.id}`, JSON.stringify(specialProfile))
-    }
-
-    // Check if user is logged in from localStorage
-    const storedUser = localStorage.getItem("user")
-
-    if (storedUser) {
-      try {
-        const parsedUser = JSON.parse(storedUser)
-        setUser(parsedUser)
-        setSession({ user: parsedUser })
-
-        // Get profile from localStorage
-        const storedProfile = localStorage.getItem("profile")
-        if (storedProfile) {
-          setProfile(JSON.parse(storedProfile))
-        } else {
-          // Create default profile
-          const defaultProfile: Profile = {
-            id: parsedUser.id,
-            email: parsedUser.email,
-            name: parsedUser.user_metadata?.name || null,
-            created_at: new Date().toISOString(),
-            updated_at: new Date().toISOString(),
-          }
-          setProfile(defaultProfile)
-          localStorage.setItem("profile", JSON.stringify(defaultProfile))
+    // Initialize registered users if not exists (client only)
+    if (typeof window !== "undefined") {
+      if (!localStorage.getItem("registeredUsers")) {
+        // Add the special user to registered users
+        const specialUser: User = {
+          id: "special_user_123",
+          email: "amineothmani56@gmail.com",
+          password: "123456",
+        user_metadata: { name: "Amine Othmani" },
         }
-      } catch (error) {
-        console.error("Error parsing stored user:", error)
+        localStorage.setItem("registeredUsers", JSON.stringify([specialUser]))
+
+        // Create special user profile with default image
+        const specialProfile: Profile = {
+          id: specialUser.id,
+          email: specialUser.email,
+          name: "Amine Othmani",
+          bio: "Mental health enthusiast and app tester",
+          profile_image_url: SPECIAL_USER_IMAGE,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        }
+        localStorage.setItem(`profile_${specialUser.id}`, JSON.stringify(specialProfile))
       }
     }
-
-    setLoading(false)
   }, [])
 
   const signUp = async (email: string, password: string, name?: string, profileImage?: string | null) => {
@@ -203,7 +200,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const specialUser: User = {
           id: "special_user_123",
           email: "amineothmani56@gmail.com",
-          user_metadata: { name: "Amine Othmani", specialAccess: true },
+          user_metadata: { name: "Amine Othmani" },
         }
 
         // Store user in localStorage
@@ -377,14 +374,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         title: "Logged in with Google",
         description: "You have been logged in successfully.",
       })
-      return true
+      // No return value (void)
     } catch (error: any) {
       toast({
         title: "Login failed",
         description: error.message || "Failed to sign in with Google.",
         variant: "destructive",
       })
-      return false
+      throw error
     }
   }
 
