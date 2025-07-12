@@ -20,19 +20,13 @@ export async function middleware(req: NextRequest) {
   const isProtectedRoute = req.nextUrl.pathname.startsWith("/dashboard")
   const isAuthRoute = req.nextUrl.pathname.startsWith("/auth")
 
-  // Redirect logic
-  if (!isAuthenticated && isProtectedRoute && !isDevelopment) {
-    // Redirect unauthenticated users trying to access protected routes to the login page
-    const redirectUrl = new URL("/auth", req.url)
-    return NextResponse.redirect(redirectUrl)
-  }
-
+  // Only redirect authenticated users away from /auth (optional, can be removed if you want to allow access)
   if (isAuthenticated && isAuthRoute) {
-    // Redirect authenticated users trying to access auth routes to the dashboard
     const redirectUrl = new URL("/dashboard", req.url)
     return NextResponse.redirect(redirectUrl)
   }
 
+  // Do NOT redirect unauthenticated users on the server; let client-side handle it
   return res
 }
 
