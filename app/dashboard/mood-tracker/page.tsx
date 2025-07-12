@@ -78,7 +78,15 @@ export default function MoodTrackerPage() {
   const [isDataLoading, setIsDataLoading] = useState(true)
 
   const { toast } = useToast()
-  const { user, profile } = useAuth()
+  const { user, loading } = useAuth()
+
+  // Redirect to auth if not logged in
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    if (!loading && !user) {
+      window.location.href = "/auth"
+    }
+  }, [user, loading])
 
   // Add useEffect to fetch real data
   const fetchMoodData = useCallback(async () => {
@@ -344,6 +352,10 @@ export default function MoodTrackerPage() {
         variant: "destructive",
       })
     }
+  }
+
+  if (loading || (typeof window !== "undefined" && !user)) {
+    return null // or a loading spinner
   }
 
   return (
