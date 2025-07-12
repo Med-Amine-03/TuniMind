@@ -1,0 +1,104 @@
+[
+  {
+    "id": "1",
+    "title": "Deep Breathing",
+    "description": "A simple breathing exercise to reduce stress and anxiety.",
+    "duration": "3 minutes",
+    "category": "Breathing",
+    "imageUrl": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1000&auto=format&fit=crop",
+    "youtubeId": "tEmt1Znux58",
+    "instructions": [
+      "Find a comfortable position sitting or lying down.",
+      "Place one hand on your chest and the other on your abdomen.",
+      "Breathe in slowly through your nose, feeling your abdomen expand.",
+      "Hold your breath for a moment.",
+      "Exhale slowly through your mouth.",
+      "Repeat for 5 minutes, focusing on your breath."
+    ]
+  },
+  {
+    "id": "2",
+    "title": "Progressive Muscle Relaxation",
+    "description": "Tense and relax different muscle groups to release tension.",
+    "duration": "7 minutes",
+    "category": "Relaxation",
+    "imageUrl": "https://images.unsplash.com/photo-1545389336-cf090694435e?q=80&w=1000&auto=format&fit=crop",
+    "youtubeId": "1nZEdqcGVzo",
+    "instructions": [
+      "Lie down in a comfortable position.",
+      "Start with your feet. Tense the muscles as tightly as you can for 5 seconds.",
+      "Relax your feet completely and notice the difference.",
+      "Move up to your calves, then thighs, and continue through your body.",
+      "End with your facial muscles, tensing and relaxing each group.",
+      "Take a moment to enjoy the sensation of complete relaxation."
+    ]
+  },
+  {
+    "id": "3",
+    "title": "Guided Visualization",
+    "description": "Mental imagery exercise to promote relaxation and reduce stress.",
+    "duration": "20 minutes",
+    "category": "Meditation",
+    "imageUrl": "https://images.unsplash.com/photo-1519834785169-98be25ec3f84?q=80&w=1000&auto=format&fit=crop",
+    "youtubeId": "MIr3RsUWrdo",
+    "instructions": [
+      "Find a quiet place where you won't be disturbed.",
+      "Close your eyes and take a few deep breaths.",
+      "Imagine yourself in a peaceful place, like a beach or forest.",
+      "Engage all your senses - what do you see, hear, smell, feel?",
+      "Spend time exploring this peaceful place in your mind.",
+      "When ready, slowly bring your awareness back to the present."
+    ]
+  },
+  {
+    "id": "4",
+    "title": "Mindful Meditation",
+    "description": "Focus on the present moment to calm your mind.",
+    "duration": "6 minutes",
+    "category": "Meditation",
+    "imageUrl": "https://images.unsplash.com/photo-1593811167562-9cef47bfc4d7?q=80&w=1000&auto=format&fit=crop",
+    "youtubeId": "inpok4MKVLM",
+    "instructions": [
+      "Sit in a comfortable position with your back straight.",
+      "Close your eyes and focus on your breathing.",
+      "Notice the sensation of air entering and leaving your body.",
+      "When your mind wanders, gently bring your attention back to your breath.",
+      "Continue for 10 minutes, being present in the moment.",
+      "Slowly open your eyes when you're ready to finish."
+    ]
+  },
+  {
+    "id": "5",
+    "title": "Body Scan",
+    "description": "Systematically focus on each part of your body to release tension.",
+    "duration": "4 minutes",
+    "category": "Relaxation",
+    "imageUrl": "https://images.unsplash.com/photo-1474418397713-7ede21d49118?q=80&w=1000&auto=format&fit=crop",
+    "youtubeId": "ihwcw_ofuME",
+    "instructions": [
+      "Lie down in a comfortable position.",
+      "Close your eyes and take a few deep breaths.",
+      "Bring your attention to your feet, noticing any sensations.",
+      "Slowly move your attention up through your body, part by part.",
+      "Notice any areas of tension and consciously relax them.",
+      "When you reach your head, take a moment to feel your whole body."
+    ]
+  },
+  {
+    "id": "6",
+    "title": "5-4-3-2-1 Grounding Technique",
+    "description": "A quick exercise to ground yourself during anxiety or stress.",
+    "duration": "3 minutes",
+    "category": "Grounding",
+    "imageUrl": "https://images.unsplash.com/photo-1499209974431-9dddcece7f88?q=80&w=1000&auto=format&fit=crop",
+    "youtubeId": "pjRMg6KALiw",
+    "instructions": [
+      "Look around and name 5 things you can see.",
+      "Notice 4 things you can feel or touch.",
+      "Acknowledge 3 things you can hear.",
+      "Identify 2 things you can smell.",
+      "Name 1 thing you can taste.",
+      "Take a deep breath and notice how you feel more grounded."
+    ]
+  }
+]

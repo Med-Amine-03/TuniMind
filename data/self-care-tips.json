@@ -1,0 +1,90 @@
+[
+  {
+    "id": "1",
+    "title": "Practice Mindfulness",
+    "description": "Take 5 minutes each day to sit quietly and focus on your breath. Notice your thoughts without judgment.",
+    "category": "Stress Management",
+    "imageUrl": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1000&auto=format&fit=crop",
+    "youtubeId": "ZToicYcHIOU"
+  },
+  {
+    "id": "2",
+    "title": "Digital Detox",
+    "description": "Set aside time each day to disconnect from digital devices. Try reading a book or going for a walk instead.",
+    "category": "Stress Management",
+    "imageUrl": "https://images.unsplash.com/photo-1499209974431-9dddcece7f88?q=80&w=1000&auto=format&fit=crop",
+    "youtubeId": "sot9awBfTrY"
+  },
+  {
+    "id": "3",
+    "title": "Sleep Hygiene",
+    "description": "Establish a consistent sleep schedule. Avoid screens before bedtime and create a relaxing bedtime routine.",
+    "category": "Sleep",
+    "imageUrl": "https://www.baptisthealth.com/-/media/images/migrated/blog-images/teaser-images/good-sleep-hygiene-1280x854.jpg?rev=925da69c8e544d09abd9897a67296e97",
+    "youtubeId": "q7amXedTasQ"
+  },
+  {
+    "id": "4",
+    "title": "Hydration",
+    "description": "Drink at least 8 glasses of water daily. Proper hydration improves mood, cognition, and physical health.",
+    "category": "Physical Health",
+    "imageUrl": "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?q=80&w=1000&auto=format&fit=crop",
+    "youtubeId": "lwOPaNMTGh8"
+  },
+  {
+    "id": "5",
+    "title": "Gratitude Journal",
+    "description": "Write down three things you're grateful for each day. This practice can shift your focus to positive aspects of life.",
+    "category": "Motivation",
+    "imageUrl": "https://images.unsplash.com/photo-1483546416237-76fd26bbcdd1?q=80&w=1000&auto=format&fit=crop",
+    "youtubeId": "WI-j39vOqmk"
+  },
+  {
+    "id": "6",
+    "title": "Movement Breaks",
+    "description": "Take short movement breaks during study sessions. Even 5 minutes of stretching can improve focus and reduce stress.",
+    "category": "Physical Health",
+    "imageUrl": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1000&auto=format&fit=crop",
+    "youtubeId": "rmH_Df52eNw"
+  },
+  {
+    "id": "7",
+    "title": "Connect with Others",
+    "description": "Schedule time to connect with friends or family. Social connections are vital for mental wellbeing.",
+    "category": "Social Wellbeing",
+    "imageUrl": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1000&auto=format&fit=crop",
+    "youtubeId": "J6aZhfj9NVM"
+  },
+  {
+    "id": "8",
+    "title": "Limit Caffeine",
+    "description": "Reduce caffeine intake, especially in the afternoon and evening, to improve sleep quality.",
+    "category": "Sleep",
+    "imageUrl": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1000&auto=format&fit=crop",
+    "youtubeId": "n3b9QKo_VpM"
+  },
+  {
+    "id": "9",
+    "title": "Set Realistic Goals",
+    "description": "Break large tasks into smaller, manageable steps. Celebrate small victories along the way.",
+    "category": "Motivation",
+    "imageUrl": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?q=80&w=1000&auto=format&fit=crop",
+    "youtubeId": "H1bDIREguok"
+  },
+  {
+    "id": "10",
+    "title": "Practice Self-Compassion",
+    "description": "Treat yourself with the same kindness you would offer to a good friend. Everyone makes mistakes.",
+    "category": "Stress Management",
+    "imageUrl": "https://images.unsplash.com/photo-1602192509154-0b900ee1f851?q=80&w=1000&auto=format&fit=crop",
+    "youtubeId": "-kfUE41-JFw"
+  },
+  {
+    "id": "11",
+    "title": "5-4-3-2-1 Grounding Technique",
+    "description": "Use the 5-4-3-2-1 method to focus on your senses and ground yourself in the present moment, especially during moments of anxiety.",
+    "category": "Stress Management",
+    "imageUrl": "https://manhattanmentalhealthcounseling.com/wp-content/uploads/2023/03/5-4-3-2-1-Grounding-Technique-for-Anxiety-scaled.jpeg",
+    "youtubeId": "pjRMg6KALiw"
+  }
+]
