@@ -127,13 +127,18 @@ export default function DashboardPage() {
 
   // Check authentication status
   useEffect(() => {
-    if (!user && !loading) {
-      router.push("/auth")
+    if (typeof window === "undefined") return;
+    if (!loading && !user) {
+      window.location.href = "/auth";
     } else if (user) {
-      setIsAuthenticated(true)
-      fetchData()
+      setIsAuthenticated(true);
+      fetchData();
     }
-  }, [user, loading, router])
+  }, [user, loading]);
+
+  if (loading || (typeof window !== "undefined" && !user)) {
+    return null; // or a loading spinner
+  }
 
   // Export data handler
   const handleExportData = async () => {
